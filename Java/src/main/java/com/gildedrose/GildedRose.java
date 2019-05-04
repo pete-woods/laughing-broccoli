@@ -5,6 +5,12 @@ import java.util.Objects;
 class GildedRose {
     public static final String CONJURED = "Conjured Mana Cake";
 
+    public static final String AGED_BRIE = "Aged Brie";
+
+    public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+
+    public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
+
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -19,10 +25,10 @@ class GildedRose {
             String name = item.name;
             Objects.requireNonNull(item.name);
 
-            if (!name.equals("Aged Brie")
-                    && !name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            if (!name.equals(AGED_BRIE)
+                    && !name.equals(BACKSTAGE_PASSES)) {
                 if (item.quality > 0) {
-                    if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+                    if (!name.equals(SULFURAS)) {
                         item.quality -= calculateRate(item);
                     }
                 }
@@ -30,7 +36,7 @@ class GildedRose {
                 if (item.quality < 50) {
                     item.quality++;
 
-                    if (name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    if (name.equals(BACKSTAGE_PASSES)) {
                         if (item.sellIn < 11) {
                             if (item.quality < 50) {
                                 item.quality++;
@@ -46,15 +52,15 @@ class GildedRose {
                 }
             }
 
-            if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (!name.equals(SULFURAS)) {
                 item.sellIn--;
             }
 
             if (item.sellIn < 0) {
-                if (!name.equals("Aged Brie")) {
-                    if (!name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                if (!name.equals(AGED_BRIE)) {
+                    if (!name.equals(BACKSTAGE_PASSES)) {
                         if (item.quality > 0) {
-                            if (!name.equals("Sulfuras, Hand of Ragnaros")) {
+                            if (!name.equals(SULFURAS)) {
                                 item.quality -= calculateRate(item);
                             }
                         }

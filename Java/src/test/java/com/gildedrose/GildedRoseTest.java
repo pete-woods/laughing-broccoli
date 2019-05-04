@@ -20,15 +20,15 @@ public class GildedRoseTest {
     }
 
     private static Item agedBrie(int sellIn, int quality) {
-        return new Item("Aged Brie", sellIn, quality);
+        return new Item(GildedRose.AGED_BRIE, sellIn, quality);
     }
 
     private static Item sulfuras(int sellIn, int quality) {
-        return new Item("Sulfuras, Hand of Ragnaros", sellIn, quality);
+        return new Item(GildedRose.SULFURAS, sellIn, quality);
     }
 
     private static Item backstagePass(int sellIn, int quality) {
-        return new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+        return new Item(GildedRose.BACKSTAGE_PASSES, sellIn, quality);
     }
 
     private static Item conjured(int sellIn, int quality) {
