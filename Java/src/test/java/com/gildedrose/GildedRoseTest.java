@@ -35,6 +35,10 @@ public class GildedRoseTest {
         return new Item("Aged Brie", sellIn, quality);
     }
 
+    private static Item sulfuras(int sellIn, int quality) {
+        return new Item("Sulfuras, Hand of Ragnaros", sellIn, quality);
+    }
+
     private Helper given() {
         return new Helper(softly);
     }
@@ -185,6 +189,38 @@ public class GildedRoseTest {
                 .whenDaysPass(1)
                 .then(items -> {
                     items.element(0).isEqualToComparingFieldByField(agedBrie(99, 51));
+                });
+    }
+
+
+    /**
+     * "Sulfuras", being a legendary item, never has to be sold or decreases in quality.
+     *
+     * Just for clarification, an item can never have its quality increase above 50,
+     * however "Sulfuras" is a legendary item and as such its quality is 80 and it
+     * never alters.
+     *
+     * TODO: Unclear what we should do with Sulfuras with wrong quality, added assertion for current behaviour
+     */
+    @Test
+    public void sulfurasNeverChanges() {
+        given()
+                .items(
+                        sulfuras(10, 10),
+                        sulfuras(20, -5),
+                        sulfuras(30, 80),
+                        sulfuras(-10, -10),
+                        sulfuras(-20, 5),
+                        sulfuras(-30, 80)
+                )
+                .whenDaysPass(10)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(sulfuras(10, 10));
+                    items.element(1).isEqualToComparingFieldByField(sulfuras(20, -5));
+                    items.element(2).isEqualToComparingFieldByField(sulfuras(30, 80));
+                    items.element(3).isEqualToComparingFieldByField(sulfuras(-10, -10));
+                    items.element(4).isEqualToComparingFieldByField(sulfuras(-20, 5));
+                    items.element(5).isEqualToComparingFieldByField(sulfuras(-30, 80));
                 });
     }
 
