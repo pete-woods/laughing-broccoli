@@ -39,6 +39,10 @@ public class GildedRoseTest {
         return new Item("Sulfuras, Hand of Ragnaros", sellIn, quality);
     }
 
+    private static Item backstagePass(int sellIn, int quality) {
+        return new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
+    }
+
     private Helper given() {
         return new Helper(softly);
     }
@@ -221,6 +225,60 @@ public class GildedRoseTest {
                     items.element(3).isEqualToComparingFieldByField(sulfuras(-10, -10));
                     items.element(4).isEqualToComparingFieldByField(sulfuras(-20, 5));
                     items.element(5).isEqualToComparingFieldByField(sulfuras(-30, 80));
+                });
+    }
+
+    /**
+     * "Backstage passes", like aged brie, increases in quality as its sell-in
+     * value approaches; quality increases by 2 when there are 10 days or less
+     * and by 3 when there are 5 days or less but quality drops to 0 after the
+     * concert.
+     */
+    @Test
+    public void backstagePassesIncreaseInQuality() {
+        given()
+                .items(
+                        backstagePass(15, 10),
+                        backstagePass(10, 10),
+                        backstagePass(5, 10)
+                )
+                .whenDaysPass(1)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(backstagePass(14, 11));
+                    items.element(1).isEqualToComparingFieldByField(backstagePass(9, 12));
+                    items.element(2).isEqualToComparingFieldByField(backstagePass(4, 13));
+                });
+    }
+
+    @Test
+    public void backstagePassesIncreaseInQualityThreeDays() {
+        given()
+                .items(
+                        backstagePass(15, 10),
+                        backstagePass(10, 10),
+                        backstagePass(5, 10)
+                )
+                .whenDaysPass(3)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(backstagePass(12, 13));
+                    items.element(1).isEqualToComparingFieldByField(backstagePass(7, 16));
+                    items.element(2).isEqualToComparingFieldByField(backstagePass(2, 19));
+                });
+    }
+
+    @Test
+    public void backstagePassesNoMoreThanFiftyQuality() {
+        given()
+                .items(
+                        backstagePass(15, 50),
+                        backstagePass(10, 49),
+                        backstagePass(5, 48)
+                )
+                .whenDaysPass(1)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(backstagePass(14, 50));
+                    items.element(1).isEqualToComparingFieldByField(backstagePass(9, 50));
+                    items.element(2).isEqualToComparingFieldByField(backstagePass(4, 50));
                 });
     }
 
