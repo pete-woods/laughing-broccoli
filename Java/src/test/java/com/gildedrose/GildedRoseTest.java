@@ -2,6 +2,7 @@ package com.gildedrose;
 
 import org.assertj.core.api.JUnitSoftAssertions;
 import org.assertj.core.api.ProxyableListAssert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -149,6 +150,41 @@ public class GildedRoseTest {
                 .then(items -> {
                     items.element(0).isEqualToComparingFieldByField(agedBrie(2, 5));
                     items.element(1).isEqualToComparingFieldByField(agedBrie(2, 13));
+                });
+    }
+
+    /**
+     * The quality of an item is never more than 50.
+     */
+    @Test
+    public void agedBrieNoMoreThanFiftyQuality() {
+        given()
+                .items(
+                        agedBrie(100, 48),
+                        agedBrie(100, 49),
+                        agedBrie(100, 50)
+                )
+                .whenDaysPass(2)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(agedBrie(98, 50));
+                    items.element(1).isEqualToComparingFieldByField(agedBrie(98, 50));
+                    items.element(2).isEqualToComparingFieldByField(agedBrie(98, 50));
+                });
+    }
+
+    /**
+     * Unclear what the system is supposed to do with invalid items.
+     */
+    @Ignore
+    @Test
+    public void agedBrieEnteredWithMoreThanFiftyQuality() {
+        given()
+                .items(
+                        agedBrie(100, 51)
+                )
+                .whenDaysPass(1)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(agedBrie(99, 51));
                 });
     }
 
