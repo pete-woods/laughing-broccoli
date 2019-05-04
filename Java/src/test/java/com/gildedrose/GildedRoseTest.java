@@ -52,10 +52,8 @@ public class GildedRoseTest {
                 .whenDaysPass(1)
                 .then(items -> {
                     items.hasSize(2);
-                    items.element(0)
-                            .isEqualToComparingFieldByField(normalItem(4, 9));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(normalItem(7, 4));
+                    items.element(0).isEqualToComparingFieldByField(normalItem(4, 9));
+                    items.element(1).isEqualToComparingFieldByField(normalItem(7, 4));
                 });
     }
 
@@ -69,10 +67,8 @@ public class GildedRoseTest {
                 .whenDaysPass(3)
                 .then(items -> {
                     items.hasSize(2);
-                    items.element(0)
-                            .isEqualToComparingFieldByField(normalItem(2, 7));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(normalItem(5, 2));
+                    items.element(0).isEqualToComparingFieldByField(normalItem(2, 7));
+                    items.element(1).isEqualToComparingFieldByField(normalItem(5, 2));
                 });
     }
 
@@ -86,10 +82,8 @@ public class GildedRoseTest {
                 .whenDaysPass(5)
                 .then(items -> {
                     items.hasSize(2);
-                    items.element(0)
-                            .isEqualToComparingFieldByField(normalItem(0, 5));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(normalItem(3, 0));
+                    items.element(0).isEqualToComparingFieldByField(normalItem(0, 5));
+                    items.element(1).isEqualToComparingFieldByField(normalItem(3, 0));
                 });
     }
 
@@ -105,10 +99,8 @@ public class GildedRoseTest {
                 )
                 .whenDaysPass(1)
                 .then(items -> {
-                    items.element(0)
-                            .isEqualToComparingFieldByField(normalItem(-1, 8));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(normalItem(-6, 2));
+                    items.element(0).isEqualToComparingFieldByField(normalItem(-1, 8));
+                    items.element(1).isEqualToComparingFieldByField(normalItem(-6, 2));
                 });
     }
 
@@ -124,10 +116,8 @@ public class GildedRoseTest {
                 )
                 .whenDaysPass(5)
                 .then(items -> {
-                    items.element(0)
-                            .isEqualToComparingFieldByField(normalItem(-5, 0));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(normalItem(-5, 0));
+                    items.element(0).isEqualToComparingFieldByField(normalItem(-5, 0));
+                    items.element(1).isEqualToComparingFieldByField(normalItem(-5, 0));
                 });
     }
 
@@ -143,10 +133,8 @@ public class GildedRoseTest {
                 )
                 .whenDaysPass(1)
                 .then(items -> {
-                    items.element(0)
-                            .isEqualToComparingFieldByField(agedBrie(4, 3));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(agedBrie(4, 11));
+                    items.element(0).isEqualToComparingFieldByField(agedBrie(4, 3));
+                    items.element(1).isEqualToComparingFieldByField(agedBrie(4, 11));
                 });
     }
 
@@ -159,10 +147,8 @@ public class GildedRoseTest {
                 )
                 .whenDaysPass(3)
                 .then(items -> {
-                    items.element(0)
-                            .isEqualToComparingFieldByField(agedBrie(2, 5));
-                    items.element(1)
-                            .isEqualToComparingFieldByField(agedBrie(2, 13));
+                    items.element(0).isEqualToComparingFieldByField(agedBrie(2, 5));
+                    items.element(1).isEqualToComparingFieldByField(agedBrie(2, 13));
                 });
     }
 
