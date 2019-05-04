@@ -31,6 +31,10 @@ public class GildedRoseTest {
         return new Item("Backstage passes to a TAFKAL80ETC concert", sellIn, quality);
     }
 
+    private static Item conjured(int sellIn, int quality) {
+        return new Item("Conjured Mana Cake", sellIn, quality);
+    }
+
     private Helper given() {
         return new Helper(softly);
     }
@@ -299,6 +303,29 @@ public class GildedRoseTest {
                     items.element(4).isEqualToComparingFieldByField(backstagePass(-5, 0));
                 });
     }
+
+    /**
+     * "Conjured" items degrade in quality twice as fast as normal items
+     */
+    @Ignore("Conjured items need implementing")
+    @Test
+    public void conjuredItemsDegradeTwiceAsFast() {
+        given()
+                .items(
+                        conjured(10, 10),
+                        conjured(5, 10),
+                        conjured(-5, 10),
+                        conjured(-10, 10)
+                )
+                .whenDaysPass(1)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(conjured(9, 8));
+                    items.element(1).isEqualToComparingFieldByField(conjured(4, 8));
+                    items.element(2).isEqualToComparingFieldByField(conjured(-6, 6));
+                    items.element(3).isEqualToComparingFieldByField(conjured(-11, 6));
+                });
+    }
+
     private static class Helper {
         private final JUnitSoftAssertions softly;
 
