@@ -32,7 +32,7 @@ public class GildedRoseTest {
     }
 
     private static Item conjured(int sellIn, int quality) {
-        return new Item("Conjured Mana Cake", sellIn, quality);
+        return new Item(GildedRose.CONJURED, sellIn, quality);
     }
 
     private Helper given() {
@@ -307,7 +307,6 @@ public class GildedRoseTest {
     /**
      * "Conjured" items degrade in quality twice as fast as normal items
      */
-    @Ignore("Conjured items need implementing")
     @Test
     public void conjuredItemsDegradeTwiceAsFast() {
         given()
