@@ -12,18 +12,6 @@ import static java.util.Arrays.asList;
 
 public class GildedRoseTest {
 
-    private static final Item[] ALL_ITEMS = {
-            new Item("+5 Dexterity Vest", 10, 20), //
-            new Item("Aged Brie", 2, 0), //
-            new Item("Elixir of the Mongoose", 5, 7), //
-            new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-            new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-            new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
-            // this conjured item does not work properly yet
-            new Item("Conjured Mana Cake", 3, 6)};
-
     @Rule
     public final JUnitSoftAssertions softly = new JUnitSoftAssertions();
 
@@ -199,11 +187,11 @@ public class GildedRoseTest {
 
     /**
      * "Sulfuras", being a legendary item, never has to be sold or decreases in quality.
-     *
+     * <p>
      * Just for clarification, an item can never have its quality increase above 50,
      * however "Sulfuras" is a legendary item and as such its quality is 80 and it
      * never alters.
-     *
+     * <p>
      * TODO: Unclear what we should do with Sulfuras with wrong quality, added assertion for current behaviour
      */
     @Test
