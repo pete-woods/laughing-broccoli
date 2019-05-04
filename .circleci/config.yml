@@ -1,0 +1,31 @@
+version: 2.1
+orbs:
+  maven: circleci/maven@0.0.8
+
+executors:
+  java-11-executor:
+    docker:
+      - image: circleci/openjdk:11-jdk
+
+# Can't use vanilla Orb, as it doesn't let you change directory for the test step
+jobs:
+  test:
+    executor: java-11-executor
+    working_directory: ~/project/Java
+    steps:
+      - checkout:
+          path: ~/project
+      - maven/with_cache:
+          steps:
+            - run:
+                name: Run Tests
+                command: mvn verify
+          # Orb incorrectly has this as a required parameter
+          settings_file: ""
+      - maven/process_test_results:
+          test_results_path: "target/surefire-reports"
+
+workflows:
+  checkout-build-test:
+    jobs:
+      - test
