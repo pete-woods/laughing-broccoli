@@ -1,5 +1,7 @@
 package com.gildedrose;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 class GildedRose {
@@ -11,15 +13,18 @@ class GildedRose {
 
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
 
-    Item[] items;
+    private final List<Item> items;
 
-    public GildedRose(Item[] items) {
+    public GildedRose(List<Item> items) {
         this.items = items;
     }
 
+    public List<Item> getItems() {
+        return Collections.unmodifiableList(items);
+    }
+
     public void updateQuality() {
-        for (int i = 0; i < items.length; i++) {
-            Item item = items[i];
+        items.forEach(item -> {
             Objects.requireNonNull(item);
 
             String name = item.name;
@@ -73,7 +78,7 @@ class GildedRose {
                     }
                 }
             }
-        }
+        });
     }
 
     private int calculateRate(Item item) {

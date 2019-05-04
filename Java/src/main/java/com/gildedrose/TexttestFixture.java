@@ -1,6 +1,7 @@
 package com.gildedrose;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 
 public class TexttestFixture {
     public static void main(String[] args) {
@@ -22,7 +23,7 @@ public class TexttestFixture {
                 // this conjured item does not work properly yet
                 new Item("Conjured Mana Cake", 3, 6) };
 
-        GildedRose app = new GildedRose(items);
+        GildedRose app = new GildedRose(Arrays.asList(items));
 
         int days = 2;
         if (args.length > 0) {

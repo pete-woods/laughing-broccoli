@@ -6,9 +6,8 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.function.Consumer;
-
-import static java.util.Arrays.asList;
 
 public class GildedRoseTest {
 
@@ -335,7 +334,7 @@ public class GildedRoseTest {
         }
 
         public Helper items(Item... items) {
-            gildedRose = new GildedRose(items);
+            gildedRose = new GildedRose(Arrays.asList(items));
             return this;
         }
 
@@ -347,7 +346,7 @@ public class GildedRoseTest {
         }
 
         public void then(Consumer<ProxyableListAssert<Item>> consumer) {
-            consumer.accept(softly.assertThat(asList(gildedRose.items)));
+            consumer.accept(softly.assertThat(gildedRose.getItems()));
         }
     }
 }
