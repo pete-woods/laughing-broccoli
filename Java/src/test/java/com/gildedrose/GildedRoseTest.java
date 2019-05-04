@@ -282,6 +282,35 @@ public class GildedRoseTest {
                 });
     }
 
+    @Test
+    public void backstagePassesQualityDropsToZero() {
+        given()
+                .items(
+                        backstagePass(0, 50),
+                        backstagePass(1, 50)
+                )
+                .whenDaysPass(1)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(backstagePass(-1, 0));
+                    items.element(1).isEqualToComparingFieldByField(backstagePass(0, 50));
+                });
+        given()
+                .items(
+                        backstagePass(5, 50),
+                        backstagePass(4, 50),
+                        backstagePass(3, 50),
+                        backstagePass(2, 50),
+                        backstagePass(1, 50)
+                )
+                .whenDaysPass(6)
+                .then(items -> {
+                    items.element(0).isEqualToComparingFieldByField(backstagePass(-1, 0));
+                    items.element(1).isEqualToComparingFieldByField(backstagePass(-2, 0));
+                    items.element(2).isEqualToComparingFieldByField(backstagePass(-3, 0));
+                    items.element(3).isEqualToComparingFieldByField(backstagePass(-4, 0));
+                    items.element(4).isEqualToComparingFieldByField(backstagePass(-5, 0));
+                });
+    }
     private static class Helper {
         private final JUnitSoftAssertions softly;
 
